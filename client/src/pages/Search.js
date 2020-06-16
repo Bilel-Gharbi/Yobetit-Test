@@ -1,12 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  getAllCountries,
-  searchForCountry,
-  clearData,
-  getAllCapitalsCountries,
-  searchForCountryByCapital,
-} from "../actions/countries";
+import * as actions from "../actions/countries";
 
 import SearchInput from "../components/SearchInput";
 import TextArea from "../components/TextArea";
@@ -14,8 +8,8 @@ import CustomButton from "../components/CustomButton";
 
 const Search = ({ allCountries, searchedCountries, ...props }) => {
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <>
+      <div style={styles.container1}>
         <SearchInput
           data={searchedCountries}
           label="search by name"
@@ -43,19 +37,17 @@ const Search = ({ allCountries, searchedCountries, ...props }) => {
         />
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        <div style={{ flex: "2", display: "flex", alignItems: "center" }}>
+      <div style={styles.container2}>
+        <div>
+          <CustomButton name="All countries" action={props.getAllCountries} />
           <CustomButton
-            name="get all countries name"
-            action={props.getAllCountries}
+            name="All capitals"
+            action={() =>
+              props.getAllCapitalsCountries() && props.clearData("allCountries")
+            }
           />
-          <CustomButton
-            name="get all capitals"
-            action={props.getAllCapitalsCountries}
-          />
-          {/* <CustomButton /> */}
         </div>
-        <div style={{ flex: "2" }}>
+        <div>
           <TextArea
             data={allCountries.length ? allCountries : props.allCapitals}
             rowMin={10}
@@ -63,8 +55,21 @@ const Search = ({ allCountries, searchedCountries, ...props }) => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
+};
+
+const styles = {
+  container1: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    marginTop: "20px",
+  },
+  container2: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
 };
 
 const mapStateToProps = (state) => {
@@ -75,10 +80,4 @@ const mapStateToProps = (state) => {
     allCapitals: state.countries.allCapitals,
   };
 };
-export default connect(mapStateToProps, {
-  getAllCountries,
-  searchForCountry,
-  getAllCapitalsCountries,
-  searchForCountryByCapital,
-  clearData,
-})(Search);
+export default connect(mapStateToProps, { ...actions })(Search);

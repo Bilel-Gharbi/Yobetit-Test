@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-//import { clearData } from "../actions/countries";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 

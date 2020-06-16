@@ -18,7 +18,7 @@ const getAll = async (req, res) => {
         return { name, capital, region };
       });
     }
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       msg: "Get countries",
       result,
@@ -46,26 +46,12 @@ const search = async (req, res) => {
       );
     }
 
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       msg: "user logged",
       result,
     });
   } catch (err) {
-    console.log(err);
-    res.status(401).json({ status: "fail", err });
-  }
-};
-
-const test = async (req, res) => {
-  try {
-    res.status(201).json({
-      status: "success",
-      msg: "user logged",
-      result: req.body,
-    });
-  } catch (err) {
-    console.log(err);
     res.status(401).json({ status: "fail", err });
   }
 };
@@ -73,5 +59,4 @@ const test = async (req, res) => {
 module.exports = {
   getAll,
   search,
-  test,
 };

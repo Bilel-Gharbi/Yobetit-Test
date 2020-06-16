@@ -11,5 +11,7 @@ export const SEARCH_BY_CAPITAL = "SEARCH_BY_CAPITAL";
 
 export const CLEAR_DATA = "CLEAR_DATA";
 
-//UI
-export const SET_COMPONENT_TO_RENDER = "SET_COMPONENT_TO_RENDER";
+//Game
+export const START_NEW_GAME = "START_NEW_GAME";
+export const PLAY = "PLAY";
+export const YOU_LOOSE = "YOU_LOOSE";
